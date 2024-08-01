@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>6 - css</title>
+    <style>
+        @media(max-width:430px){
+            body{
+                background-color: #2f4f4f;
+            }
+
+            .head{
+                position: relative;
+                height: 100px;
+                text-align: center;
+                align-content: center;
+                justify-content: center;
+                font-size: 50px;
+                top:12vh;
+                color: yellow;
+            }
+
+            b{
+                color:orange;
+            }
+
+            .name{
+                position: relative;
+                border-top-left-radius: 20px;
+                height: 50px;
+                top: 19vh;
+                border-radius: 20px;
+                font-family: 'Courier New', Courier, monospace;
+                font-weight: bold;
+            }
+
+
+            
+            #first{
+                position: absolute;
+                height: 100%;
+                width: 40%;
+                text-align: center;
+                align-content: center;
+                justify-content: center;
+                color: #ffff00;   
+                border-radius: 10px; 
+                border-bottom: solid 2px #ffff00;            
+            }
+
+            #second{
+                position: absolute;
+                height:100%;
+                width:40%;
+                text-align: center;
+                align-content: center;
+                justify-content: center;
+                color: #f8f8ff;
+                right:0%;
+                border-radius: 10px;
+            }
+
+            #button{
+                position: absolute;
+                width: 100%;
+                height:100%;
+                left: 40%;
+                border-radius: 10px;
+            }
+
+            button{
+                position: absolute;
+                width: 20%;
+                height:100%;
+                background: #2f4f4f;
+                border-radius: 10%;
+                border-style: hidden;
+            }
+
+            .container{
+                position:relative;
+                height: 20vh;
+                top:20vh;
+                border-radius: 20px;
+            }
+
+            .in{
+                border-style: hidden;
+                width:100%;
+                height:50%;
+                background:#fffff0;
+                color: #484848;
+                position:absolute;
+                justify-content: center;
+                align-items: center;
+                align-content: center;
+                border-top-left-radius: 20px;
+                border-top-right-radius: 20px;
+                text-align: center;
+                font-family: 'Courier New', Courier, monospace;
+                
+            }
+
+            .input{
+                border-style: hidden;
+                width:95%;
+                background:#fffff0;
+                color: #484848;
+                border-top-left-radius: 20px;
+                border-top-right-radius: 20px;
+                left:10%;
+                text-align: center;
+                justify-content: center;
+                align-content: center;
+                border-top: 50%;
+                font-family: 'Courier New', Courier, monospace;
+            }
+
+            .out{
+                width:100%;
+                height:50%;
+                background-color:#ffffe0;
+                color:#484848;
+                position: absolute;
+                font-size: 25px;
+                font-weight: bold;
+                top: 10vh;
+                left:0%;
+                font-family: 'Courier New', Courier, monospace;
+                align-content: center;
+                text-align: center;
+                word-wrap: break-word;
+                overflow:scroll;
+                border-bottom-left-radius: 20px;
+                border-bottom-right-radius: 20px;
+            }
+
+
+            textarea{
+                width:100%;
+                height:50%;
+                font-size: x-large;
+                padding-top: 1.75em;
+                padding-bottom: 1.75em;
+                text-align: center;
+                text-align-last: center;
+                font-family: 'Courier New', Courier, monospace;
+                font-weight: bold;
+            }
+
+        }
+    </style>
+</head>
+</head>
+<body>
+    <div class="head">
+        Coin<b>verter</b>
+    </div>
+
+    <div class="name">
+
+        <div id="first">
+           <p id="aName">Real<br></p> 
+        </div>
+    
+        <div id="second">
+            <p id="bName">Dolar<br></p>
+        </div>
+        <div id="button">
+            <button id="troca" type="button" onclick="change(), catchMoeda()">
+                <img width="24" height="24" src="https://img.icons8.com/android/24/000000/data-in-both-directions.png" alt="data-in-both-directions"/>            
+            </button>
+        </div>
+
+    </div>
+
+    <div class="container">
+        <div class="in">
+            <textarea class="input" id="aMoeda" placeholder="0,00"
+            cols="10"
+            rows="1"
+            onkeyup="catchMoeda()"></textarea>
+        </div>
+    
+        <div class="out" id="bMoeda"></div>        
+    </div>
+
+
+
+    <script>
+        let valorReal = document.getElementById("aMoeda").value;
+        let valorDolar = document.getElementById("bMoeda").value;
+        let counter = 0;
+
+        function catchMoeda(){
+            if (counter % 2 == 0) {
+                catchReal();
+            }
+            else {
+                catchDolar();
+            }
+        }
+        
+        function catchDolar(){
+            let dolar = Number(document.getElementById("aMoeda").value);
+            //Dolar dia 31/07
+            dolar = dolar * 5.65;
+            document.getElementById("bMoeda").innerHTML = dolar;
+            document.getElementById("bMoeda").innerHTML = parseFloat(document.getElementById("bMoeda").innerHTML).toFixed(2);
+            document.getElementById("bMoeda").innerHTML = "R$ " + document.getElementById("bMoeda").innerHTML;
+            return(document.getElementById("bMoeda").innerHTML);
+        }
+
+        function catchReal(){
+            let real = Number(document.getElementById("aMoeda").value);
+
+            real = real / 5.65;
+            document.getElementById("bMoeda").innerHTML = real;
+            document.getElementById("bMoeda").innerHTML = parseFloat(document.getElementById("bMoeda").innerHTML).toFixed(2);
+            document.getElementById("bMoeda").innerHTML = "$ " + document.getElementById("bMoeda").innerHTML;
+            return(document.getElementById("bMoeda").innerHTML);  
+        }
+
+        // trocar nomes
+        let nomeA = document.getElementById("aName").value;
+        let nomeB = document.getElementById("bName").value;
+
+        function change(){
+            counter += 1;
+            let nome0 = document.getElementById("aName").innerHTML;
+            nomeA = document.getElementById("bName").innerHTML;
+            nomeB = nome0;
+            document.getElementById("aName").innerHTML = nomeA;
+            document.getElementById("bName").innerHTML = nomeB;
+            
+            return(document.getElementById("aName").innerHTML, document.getElementById("bName").innerHTML), counter;
+        }
+    </script>
+</body>
+</html>
+
+
+<!--Ideia: catchText [igual no exemplo do contador de caracteres]
+    joga em algum paragrafo
+    pega o valor do paragrafo
+    
+    Ate agora tu tentou pegar o texto escrito em si
+-->
